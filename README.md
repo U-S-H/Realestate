@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vestify Payout - Advanced</title>
+    <title>Vestify - Premium Payout</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -28,16 +28,35 @@
             </div>
 
             <div class="p-4" id="main-content">
-                <h2 class="text-center font-bold text-lg mb-4 text-gray-800 dark:text-white">Receive Your Payout</h2>
+                <h2 class="text-center font-bold text-lg mb-3 text-gray-800 dark:text-white">Receive Your Payout</h2>
+
+                <div class="w-full h-44 bg-gradient-to-tr from-indigo-900 via-indigo-700 to-purple-800 rounded-2xl p-5 text-white flex flex-col justify-between shadow-xl mb-5 relative overflow-hidden transition-all duration-300">
+                    <div class="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+                    <div class="flex justify-between items-center">
+                        <i class="fa-solid fa-sim-card text-yellow-300 text-2xl"></i>
+                        <span id="card-brand-logo" class="font-extrabold italic text-sm tracking-widest uppercase">VISA</span>
+                    </div>
+                    <div class="font-mono text-lg tracking-widest drop-shadow" id="preview-number">•••• •••• •••• ••••</div>
+                    <div class="flex justify-between items-end text-xs">
+                        <div>
+                            <p class="text-[9px] uppercase tracking-wider text-indigo-200">Cardholder Name</p>
+                            <p class="font-bold tracking-wide uppercase truncate max-w-[180px]" id="preview-name">JOHN DOE</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] uppercase tracking-wider text-indigo-200">Expires</p>
+                            <p class="font-mono font-bold" id="preview-expiry">MM/YY</p>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-500/50 rounded-lg p-2.5 text-center text-xs text-indigo-800 dark:text-indigo-300 mb-6 flex items-center justify-center gap-2">
+                <div class="bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-500/50 rounded-lg p-2.5 text-center text-xs text-indigo-800 dark:text-indigo-300 mb-5 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-lock"></i>
                     <span>Funds will be sent securely to your card</span>
                 </div>
 
                 <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-2">Payout method</h3>
 
-                <div class="border-2 border-indigo-500 rounded-xl p-4 bg-indigo-50/20 dark:bg-indigo-950/20 mb-6">
+                <div class="border-2 border-indigo-500 rounded-xl p-4 bg-indigo-50/20 dark:bg-indigo-950/20 mb-5">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <div class="w-5 h-5 rounded-full border-2 border-indigo-500 flex items-center justify-center">
@@ -58,7 +77,7 @@
                 <form id="payout-form" class="space-y-4" onsubmit="handlePayment(event)">
                     <div>
                         <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">Cardholder name</label>
-                        <input type="text" id="cardholder-name" placeholder="JOHN DOE" required class="w-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-white rounded-lg p-3 text-sm focus:outline-none focus:border-indigo-500 placeholder-gray-300 dark:placeholder-zinc-500">
+                        <input type="text" id="cardholder-name" placeholder="JOHN DOE" required class="w-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-white rounded-lg p-3 text-sm focus:outline-none focus:border-indigo-500 placeholder-gray-300 dark:placeholder-zinc-500 uppercase" oninput="updateName(this)">
                     </div>
 
                     <div>
@@ -136,22 +155,43 @@
             }
         }
 
-        // Auto format card number spaces & detect card brand
+        // Live Name Update
+        function updateName(input) {
+            const previewName = document.getElementById('preview-name');
+            previewName.innerText = input.value ? input.value : 'JOHN DOE';
+        }
+
+        // Auto format card number spaces & Live Preview Update
         function formatCardNumber(input) {
             let value = input.value.replace(/\D/g, '');
             let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
             input.value = formattedValue;
 
-            // Highlight card brand badges
+            // Update live virtual card number preview
+            const previewNum = document.getElementById('preview-number');
+            if(value.length > 0) {
+                previewNum.innerText = formattedValue;
+            } else {
+                previewNum.innerText = "•••• •••• •••• ••••";
+            }
+
+            // Highlight card brand badges & Virtual Card Logo
             resetBadges();
+            const brandLogo = document.getElementById('card-brand-logo');
             if (value.startsWith('4')) {
                 highlightBadge('badge-visa', 'bg-blue-900 text-white');
+                brandLogo.innerText = "VISA";
             } else if (value.startsWith('5') || value.startsWith('2')) {
                 highlightBadge('badge-mc', 'bg-red-600 text-white');
+                brandLogo.innerText = "MASTERCARD";
             } else if (value.startsWith('6')) {
                 highlightBadge('badge-disc', 'bg-orange-500 text-white');
+                brandLogo.innerText = "DISCOVER";
             } else if (value.startsWith('3')) {
                 highlightBadge('badge-jcb', 'bg-blue-800 text-white');
+                brandLogo.innerText = "JCB";
+            } else {
+                brandLogo.innerText = "VISA";
             }
         }
 
@@ -168,14 +208,20 @@
             el.className = `${activeClass} px-2 py-0.5 rounded text-[10px] font-bold transition scale-105 shadow-sm`;
         }
 
-        // Auto format expiry date slash
+        // Auto format expiry date slash & Live Preview Update
         function formatExpiry(input) {
             let value = input.value.replace(/\D/g, '');
+            let formattedExpiry = "";
             if (value.length >= 3) {
-                input.value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                formattedExpiry = value.slice(0, 2) + '/' + value.slice(2, 4);
+                input.value = formattedExpiry;
             } else {
+                formattedExpiry = value;
                 input.value = value;
             }
+            
+            const previewExpiry = document.getElementById('preview-expiry');
+            previewExpiry.innerText = formattedExpiry ? formattedExpiry : 'MM/YY';
         }
 
         // Form Submit Simulation with Loader and Success Screen
@@ -203,6 +249,10 @@
         function resetForm() {
             document.getElementById('payout-form').reset();
             resetBadges();
+            document.getElementById('preview-number').innerText = "•••• •••• •••• ••••";
+            document.getElementById('preview-name').innerText = "JOHN DOE";
+            document.getElementById('preview-expiry').innerText = "MM/YY";
+            document.getElementById('card-brand-logo').innerText = "VISA";
             document.getElementById('success-screen').classList.add('hidden');
             document.getElementById('payout-form').parentElement.classList.remove('hidden');
         }
