@@ -249,13 +249,49 @@
         }
 
         /* Contact Section */
-        .contact-container {
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
             background: var(--card-bg);
-            padding: 50px;
+            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            max-width: 700px;
-            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .contact-info h3 {
+            color: #2563eb;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            color: var(--muted-color);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .contact-info a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
         }
 
@@ -484,22 +520,30 @@
     <!-- Contact Form Section -->
     <section class="contact" id="contact">
         <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-container">
-            <form>
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Contact Info</h3>
+                <p>Feel free to reach out via email or WhatsApp for quick projects and queries.</p>
+                <p><strong>Email:</strong> <a href="mailto:Webhub262@gmail.com">Webhub262@gmail.com</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/923379827882" target="_blank">+92 337 9827882</a></p>
+            </div>
+            <div class="contact-container">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
