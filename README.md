@@ -423,21 +423,21 @@
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Web Development">
                 <div class="card-content">
                     <h3>Web Development</h3>
-                    <p>Custom, responsive, and high-performance websites built with modern technologies tailored to your brand[span_0](start_span)[span_0](end_span).</p>
+                    <p>Custom, responsive, and high-performance websites built with modern technologies tailored to your brand.</p>
                 </div>
             </div>
             <div class="service-card">
                 <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80" alt="UI/UX Design">
                 <div class="card-content">
                     <h3>UI/UX Design</h3>
-                    <p>Engaging user interfaces and seamless experiences designed to convert visitors into loyal customers[span_1](start_span)[span_1](end_span).</p>
+                    <p>Engaging user interfaces and seamless experiences designed to convert visitors into loyal customers.</p>
                 </div>
             </div>
             <div class="service-card">
                 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" alt="Digital Solutions">
                 <div class="card-content">
                     <h3>Digital Solutions</h3>
-                    <p>Scalable software integrations and automated workflows to boost your business efficiency and growth[span_2](start_span)[span_2](end_span).</p>
+                    <p>Scalable software integrations and automated workflows to boost your business efficiency and growth.</p>
                 </div>
             </div>
         </div>
@@ -514,7 +514,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 <a href="https://web-hub-code.github.io/primesolutions/" target="_blank">Prime Solutions</a>. All rights reserved.[span_3](start_span)[span_3](end_span)</p>
+        <p>&copy; 2026 <a href="https://web-hub-code.github.io/primesolutions/" target="_blank">Prime Solutions</a>. All rights reserved.</p>
     </footer>
 
     <script>
