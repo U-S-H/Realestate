@@ -4,17 +4,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prime Solutions - Digital Agency</title>
     <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --border-color: #e5e7eb;
+            --muted-color: #6b7280;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --card-bg: #1e293b;
+            --header-bg: rgba(15, 23, 42, 0.95);
+            --border-color: #334155;
+            --muted-color: #94a3b8;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
-            background-color: #f9fafb;
-            color: #1f2937;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
         }
 
@@ -24,18 +43,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: var(--header-bg);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
-            animation: slideDown 0.8s ease-in-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .logo {
@@ -43,44 +56,40 @@
             font-weight: bold;
             color: #2563eb;
             text-decoration: none;
-            transition: transform 0.3s;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 20px;
+            align-items: center;
         }
 
         nav ul li a {
             text-decoration: none;
-            color: #4b5563;
+            color: var(--muted-color);
             font-weight: 500;
-            position: relative;
             transition: color 0.3s;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #2563eb;
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
         }
 
         nav ul li a:hover {
             color: #2563eb;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
         }
 
         .cta-btn {
@@ -90,14 +99,11 @@
             border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transition: background-color 0.3s;
         }
 
         .cta-btn:hover {
             background-color: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
         }
 
         /* Hero Section */
@@ -110,18 +116,11 @@
             padding: 140px 20px;
             background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.9)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
             color: white;
-            animation: fadeIn 1.2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .hero h1 {
             font-size: 52px;
             margin-bottom: 20px;
-            animation: fadeInUp 1s ease-out;
         }
 
         .hero p {
@@ -130,12 +129,6 @@
             margin-bottom: 35px;
             line-height: 1.6;
             color: #e2e8f0;
-            animation: fadeInUp 1.2s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .hero-btn {
@@ -146,14 +139,7 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .hero-btn:hover {
-            background-color: #f8fafc;
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         /* Stats Section */
@@ -169,12 +155,12 @@
         }
 
         .stat-card {
-            background: white;
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border-color);
         }
 
         .stat-card h3 {
@@ -184,13 +170,12 @@
         }
 
         .stat-card p {
-            color: #6b7280;
+            color: var(--muted-color);
             font-size: 14px;
-            font-weight: 500;
         }
 
-        /* Services Section */
-        .services, .portfolio, .contact {
+        /* Content Sections */
+        .services, .portfolio, .testimonials, .contact {
             padding: 90px 50px;
             max-width: 1200px;
             margin: 0 auto;
@@ -199,52 +184,28 @@
         .section-title {
             text-align: center;
             font-size: 36px;
-            color: #1e3a8a;
+            color: #2563eb;
             margin-bottom: 60px;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background-color: #2563eb;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .services-grid, .portfolio-grid {
+        .services-grid, .portfolio-grid, .testimonial-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 35px;
         }
 
-        .service-card, .portfolio-card {
-            background: #ffffff;
+        .service-card, .portfolio-card, .testimonial-card {
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-            border: 1px solid #e5e7eb;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid var(--border-color);
         }
 
         .service-card img, .portfolio-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .service-card:hover, .portfolio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.12);
-        }
-
-        .service-card:hover img, .portfolio-card:hover img {
-            transform: scale(1.1);
         }
 
         .card-content {
@@ -258,34 +219,44 @@
         }
 
         .card-content p {
-            color: #6b7280;
+            color: var(--muted-color);
             line-height: 1.6;
             font-size: 15px;
             margin-bottom: 15px;
         }
 
         .project-link {
-            display: inline-block;
             color: #2563eb;
             font-weight: 600;
             text-decoration: none;
-            transition: color 0.3s;
         }
 
-        .project-link:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
+        /* Testimonials */
+        .testimonial-card {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--muted-color);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card h4 {
+            color: #2563eb;
+            font-size: 16px;
         }
 
         /* Contact Section */
         .contact-container {
-            background: white;
+            background: var(--card-bg);
             padding: 50px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             max-width: 700px;
             margin: 0 auto;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border-color);
         }
 
         .form-group {
@@ -296,22 +267,17 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #374151;
+            color: var(--text-color);
         }
 
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #d1d5db;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
             border-radius: 8px;
             font-size: 15px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .submit-btn {
@@ -324,11 +290,53 @@
             border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            transition: background-color 0.3s;
         }
 
-        .submit-btn:hover {
-            background-color: #1d4ed8;
+        /* AI Chatbot Floating Widget */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .chatbot-btn {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .chatbot-box {
+            display: none;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 300px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        .chatbot-body {
+            padding: 15px;
+            height: 200px;
+            font-size: 14px;
+            color: var(--muted-color);
         }
 
         /* Footer */
@@ -340,45 +348,26 @@
             margin-top: 80px;
         }
 
-        footer p {
-            font-size: 14px;
-        }
-
         footer a {
             color: #60a5fa;
             text-decoration: none;
-            transition: color 0.3s;
         }
 
-        footer a:hover {
-            color: #93c5fd;
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             header {
                 padding: 15px 20px;
                 flex-direction: column;
                 gap: 15px;
             }
-
             nav ul {
-                gap: 15px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
             .hero h1 {
                 font-size: 36px;
             }
-
-            .services, .portfolio, .contact {
+            .services, .portfolio, .testimonials, .contact {
                 padding: 50px 20px;
-            }
-
-            .contact-container {
-                padding: 25px;
             }
         }
     </style>
@@ -393,10 +382,14 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <a href="#contact" class="cta-btn">Get Started</a>
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme()">🌙 Mode</button>
+            <a href="#contact" class="cta-btn">Get Started</a>
+        </div>
     </header>
 
     <!-- Hero Section -->
@@ -459,7 +452,7 @@
                 <div class="card-content">
                     <h3>Vestify Pro</h3>
                     <p>Investment and earning management platform featuring secure database logic and automated daily returns.</p>
-                    <a href="#" class="project-link">View Project &rarr;</a>
+                    <a href="https://web-hub-code.github.io/primesolutions/" target="_blank" class="project-link">View Project &rarr;</a>
                 </div>
             </div>
             <div class="portfolio-card">
@@ -467,8 +460,23 @@
                 <div class="card-content">
                     <h3>USHomeImprovements</h3>
                     <p>Professional home improvement landing page designed with clean HTML/CSS layouts and responsive elements.</p>
-                    <a href="#" class="project-link">View Project &rarr;</a>
+                    <a href="https://web-hub-code.github.io/primesolutions/" target="_blank" class="project-link">View Project &rarr;</a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">Client Testimonials</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"Prime Solutions delivered an exceptional website for our business ahead of schedule. Highly professional team!"</p>
+                <h4>- Sarah Johnson</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Their attention to responsive design and UI/UX completely transformed our online conversion rates."</p>
+                <h4>- Michael Brown</h4>
             </div>
         </div>
     </section>
@@ -495,10 +503,32 @@
         </div>
     </section>
 
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-container">
+        <div class="chatbot-box" id="chatbotBox">
+            <div class="chatbot-header">Prime AI Assistant</div>
+            <div class="chatbot-body">Hello! How can I help you scale your business today?</div>
+        </div>
+        <button class="chatbot-btn" onclick="toggleChat()">💬</button>
+    </div>
+
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 <a href="https://web-hub-code.github.io/primesolutions/" target="_blank">Prime Solutions</a>. All rights reserved.</p>
+        <p>&copy; 2026 <a href="https://web-hub-code.github.io/primesolutions/" target="_blank">Prime Solutions</a>. All rights reserved.[span_3](start_span)[span_3](end_span)</p>
     </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        function toggleChat() {
+            const box = document.getElementById('chatbotBox');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
 
 </body>
 </html>
