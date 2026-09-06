@@ -15,19 +15,27 @@
         body {
             background-color: #f9fafb;
             color: #1f2937;
+            overflow-x: hidden;
         }
 
-        /* Header / Navbar */
+        /* Header / Navbar with Fade-In Animation */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
+            animation: slideDown 0.8s ease-in-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .logo {
@@ -35,6 +43,11 @@
             font-weight: bold;
             color: #2563eb;
             text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         nav ul {
@@ -47,7 +60,23 @@
             text-decoration: none;
             color: #4b5563;
             font-weight: 500;
+            position: relative;
             transition: color 0.3s;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         nav ul li a:hover {
@@ -61,96 +90,146 @@
             border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
         }
 
         .cta-btn:hover {
             background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
         }
 
-        /* Hero Section */
+        /* Hero Section with Background Image & Zoom Animation */
         .hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 140px 20px;
+            background: linear-gradient(rgba(30, 58, 138, 0.75), rgba(30, 58, 138, 0.85)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            color: white;
+            position: relative;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .hero h1 {
-            font-size: 48px;
-            color: #1e3a8a;
+            font-size: 52px;
             margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero p {
             font-size: 18px;
-            color: #4b5563;
-            max-width: 600px;
-            margin-bottom: 30px;
+            max-width: 650px;
+            margin-bottom: 35px;
             line-height: 1.6;
+            color: #e2e8f0;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .hero-btn {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 6px;
+            background-color: #ffffff;
+            color: #2563eb;
+            padding: 14px 35px;
+            border-radius: 30px;
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeInUp 1.4s ease-out;
         }
 
         .hero-btn:hover {
-            background-color: #1d4ed8;
+            background-color: #f8fafc;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
-        /* Services Section */
+        /* Services Section with Animated Cards */
         .services {
-            padding: 80px 50px;
+            padding: 100px 50px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 32px;
+            font-size: 36px;
             color: #1e3a8a;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: #2563eb;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
         }
 
         .service-card {
             background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
             border: 1px solid #e5e7eb;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.12);
+        }
+
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 25px;
         }
 
         .service-card h3 {
-            font-size: 20px;
+            font-size: 22px;
             color: #2563eb;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .service-card p {
             color: #6b7280;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-size: 15px;
         }
 
         /* Footer */
@@ -158,8 +237,8 @@
             background-color: #1f2937;
             color: #9ca3af;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
+            padding: 40px 20px;
+            margin-top: 80px;
         }
 
         footer p {
@@ -169,9 +248,11 @@
         footer a {
             color: #60a5fa;
             text-decoration: none;
+            transition: color 0.3s;
         }
 
         footer a:hover {
+            color: #93c5fd;
             text-decoration: underline;
         }
 
@@ -188,11 +269,15 @@
             }
 
             .hero h1 {
-                font-size: 32px;
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
             }
 
             .services {
-                padding: 40px 20px;
+                padding: 50px 20px;
             }
         }
     </style>
@@ -220,21 +305,30 @@
         <a href="#services" class="hero-btn">Explore Services</a>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Section with Free Unsplash Images -->
     <section class="services" id="services">
         <h2 class="section-title">What We Offer</h2>
         <div class="services-grid">
             <div class="service-card">
-                <h3>Web Development</h3>
-                <p>Custom, responsive, and high-performance websites built with modern technologies tailored to your brand[span_0](start_span)[span_0](end_span).</p>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Web Development">
+                <div class="service-content">
+                    <h3>Web Development</h3>
+                    <p>Custom, responsive, and high-performance websites built with modern technologies tailored to your brand[span_0](start_span)[span_0](end_span).</p>
+                </div>
             </div>
             <div class="service-card">
-                <h3>UI/UX Design</h3>
-                <p>Engaging user interfaces and seamless experiences designed to convert visitors into loyal customers[span_1](start_span)[span_1](end_span).</p>
+                <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80" alt="UI/UX Design">
+                <div class="service-content">
+                    <h3>UI/UX Design</h3>
+                    <p>Engaging user interfaces and seamless experiences designed to convert visitors into loyal customers[span_1](start_span)[span_1](end_span).</p>
+                </div>
             </div>
             <div class="service-card">
-                <h3>Digital Solutions</h3>
-                <p>Scalable software integrations and automated workflows to boost your business efficiency and growth[span_2](start_span)[span_2](end_span).</p>
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" alt="Digital Solutions">
+                <div class="service-content">
+                    <h3>Digital Solutions</h3>
+                    <p>Scalable software integrations and automated workflows to boost your business efficiency and growth[span_2](start_span)[span_2](end_span).</p>
+                </div>
             </div>
         </div>
     </section>
